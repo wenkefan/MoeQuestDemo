@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">小姐姐</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="error_message">哎呀,加载失败了,请检查下网络或者下拉重新刷新下~</string>
+    <string name="image_error">图片加载失败啦~</string>
+    <string name="back_message">再按一次退出小姐姐</string>
+    <string name="gank_meizi">萌妹纸</string>
+    <string name="meizitu">妹纸图</string>
+    <string name="tao_female">淘女郎</string>
+    <string name="douban_meizi">豆瓣妹纸</string>
+    <string name="huaban_meizi">花瓣妹纸</string>
+    <string name="jiandan_meizi">煎蛋妹纸</string>
+    <string name="action_notifiable">每天中午提醒</string>
+    <string name="headsup_title">萌妹</string>
+    <string name="headsup_content">今天的妹纸已经准备好了，快来享用吧~</string>
+    <string name="image_icon_dec">app icon</string>
+    <string name="about_introduce">「萌妹纸」- 每日更新妹纸福利图</string>
+    <string name="save">保存</string>
+    <string name="share">分享</string>
+</resources>

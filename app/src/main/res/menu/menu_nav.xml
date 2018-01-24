@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:checked="true"
+            android:icon="@mipmap/home"
+            android:title="@string/gank_meizi" />
+
+        <item
+            android:id="@+id/nav_meizitu"
+            android:checked="true"
+            android:icon="@mipmap/picture"
+            android:title="@string/meizitu" />
+
+        <item
+            android:id="@+id/nav_tao"
+            android:checked="true"
+            android:icon="@mipmap/wedding_dress"
+            android:title="@string/tao_female" />
+        <item
+            android:id="@+id/nav_douban"
+            android:icon="@mipmap/bow_tie"
+            android:title="@string/douban_meizi" />
+        <item
+            android:id="@+id/nav_huaban"
+            android:icon="@mipmap/flower"
+            android:title="@string/huaban_meizi" />
+
+        <item
+            android:id="@+id/nav_jiandan"
+            android:icon="@mipmap/year_of_rooster"
+            android:title="@string/jiandan_meizi" />
+    </group>
+
+</menu>
