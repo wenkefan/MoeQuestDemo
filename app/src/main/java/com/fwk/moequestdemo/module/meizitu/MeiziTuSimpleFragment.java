@@ -9,8 +9,10 @@ import com.fwk.moequestdemo.R;
 import com.fwk.moequestdemo.base.RxBaseFragment;
 import com.fwk.moequestdemo.entity.meizitu.MeiziTu;
 import com.fwk.moequestdemo.network.RetrofitHelper;
+import com.fwk.moequestdemo.utils.MeiziUtil;
 
 import java.io.IOException;
+import java.util.List;
 
 import butterknife.Bind;
 import io.realm.Realm;
@@ -92,7 +94,7 @@ public class MeiziTuSimpleFragment extends RxBaseFragment {
 
     private void getMeiziTu() {
         RetrofitHelper.getMeiziTuApi()
-                .getMeiziTuApi(type, page)
+                .getMeiziTuType(type)
                 .compose(this.<ResponseBody>bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -101,7 +103,8 @@ public class MeiziTuSimpleFragment extends RxBaseFragment {
                     public void call(ResponseBody responseBody) {
                         try {
                             String html = responseBody.string();
-                            Log.d("fwk",html);
+                            List<MeiziTu> list = MeiziUtil.getInstance().parserMeiziTuHtml(html,type);
+                            MeiziUtil.getInstance().putMeiziTuCache(list);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

@@ -23,4 +23,16 @@ public interface MeiziTuApi {
      */
     @GET("{type}/comment-page-{page}#comments")
     Observable<ResponseBody> getHomeMeiziApi(@Path("type") String type, @Path("page") int page);
+
+    /**
+     * 分类查询
+     */
+    @GET("{type}")
+    Observable<ResponseBody> getMeiziTuType(@Path("type") String type);
+
+    /**
+     * 查询组内妹子图
+     */
+    @GET("{type}/{id}")
+    Observable<ResponseBody> getMeiziTuMeiziList(@Path("type") String type, @Path("id") String id);
 }

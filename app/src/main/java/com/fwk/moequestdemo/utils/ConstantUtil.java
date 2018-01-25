@@ -19,6 +19,16 @@ public class ConstantUtil {
   //腾讯buglyID
   public static final String BUGLY_ID = "900037370";
 
+  //-----------------------------------------------------------------------
+  //首页
+  public static final String HOME = "";
+
+  //热门
+  public static final String HOT_MEIZI = "hot";
+
+  //推荐
+  public static final String TUIJIAN_MEIZI = "best";
+
   //性感妹子
   public static final String XINGGAN_MEIZI = "xinggan";
 
@@ -31,12 +41,6 @@ public class ConstantUtil {
   //清纯妹子
   public static final String QINGCHUN_MEIZI = "mm";
 
-  //推荐
-  public static final String TUIJIAN_MEIZI = "best";
-
-  //热门
-  public static final String HOT_MEIZI = "hot";
-
-  //每日更新
-  public static final String UPDATE_MEIZI = "all";
+  //自拍妹子
+  public static final String ZIPAI_MEIZI = "zipai";
 }

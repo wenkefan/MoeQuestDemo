@@ -2,7 +2,14 @@ package com.fwk.moequestdemo.utils;
 
 import com.fwk.moequestdemo.entity.gank.GankMeizi;
 import com.fwk.moequestdemo.entity.gank.GankMeiziInfo;
+import com.fwk.moequestdemo.entity.meizitu.MeiziTu;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
@@ -34,7 +41,7 @@ public class MeiziUtil {
      * 保存Gank到数据库
      * @param gankMeiziInfos
      */
-    public void putGankMeiziCache(List<GankMeiziInfo> gankMeiziInfos){
+    public final void putGankMeiziCache(List<GankMeiziInfo> gankMeiziInfos){
         GankMeizi meizi;
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
@@ -46,6 +53,52 @@ public class MeiziUtil {
             meizi.setDesc(desc);
             realm.copyToRealm(meizi);
         }
+        realm.commitTransaction();
+        realm.close();
+    }
+
+    /**
+     * 解析妹子图html
+     */
+    public final List<MeiziTu> parserMeiziTuHtml(String html, String type) {
+
+        List<MeiziTu> list = new ArrayList<>();
+        Document doc = Jsoup.parse(html);
+        Elements links = doc.select("li");
+
+        Element aelement;
+        Element imgelement;
+        for (int i = 7; i < links.size(); i++) {
+            imgelement = links.get(i).select("img").first();
+            aelement = links.get(i).select("a").first();
+            MeiziTu bean = new MeiziTu();
+            bean.setOrder(i);
+            bean.setTitle(imgelement.attr("alt"));
+            bean.setType(type);
+            bean.setHeight(354);
+            bean.setWidth(236);
+            bean.setImageurl(imgelement.attr("data-original"));
+            bean.setUrl(aelement.attr("href"));
+            bean.setGroupid(url2groupid(bean.getUrl()));
+            list.add(bean);
+        }
+        return list;
+    }
+    /**
+     * 获取妹子图的GroupId
+     */
+    private int url2groupid(String url) {
+
+        return Integer.parseInt(url.split("/")[3]);
+    }
+
+    /**
+     * 保存妹子图数据到数据库中
+     */
+    public final void putMeiziTuCache(List<MeiziTu> list){
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        realm.copyToRealm(list);
         realm.commitTransaction();
         realm.close();
     }
