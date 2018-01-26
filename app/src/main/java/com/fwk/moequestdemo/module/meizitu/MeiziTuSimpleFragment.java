@@ -12,7 +12,9 @@ import com.fwk.moequestdemo.adapter.MeiziTuAdapter;
 import com.fwk.moequestdemo.base.RxBaseFragment;
 import com.fwk.moequestdemo.entity.meizitu.MeiziTu;
 import com.fwk.moequestdemo.network.RetrofitHelper;
+import com.fwk.moequestdemo.utils.LogUtil;
 import com.fwk.moequestdemo.utils.MeiziUtil;
+import com.fwk.moequestdemo.utils.SnackbarUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -74,14 +76,14 @@ public class MeiziTuSimpleFragment extends RxBaseFragment {
         showProgress();
         realm = Realm.getDefaultInstance();
         list = realm.where(MeiziTu.class)
-                .equalTo("type",type)
+                .equalTo("type", type)
                 .findAll();
         initRecycleView();
     }
 
     private void initRecycleView() {
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new MeiziTuAdapter(mRecyclerView,list);
+        mAdapter = new MeiziTuAdapter(mRecyclerView, list,type,this);
         mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -107,7 +109,7 @@ public class MeiziTuSimpleFragment extends RxBaseFragment {
                 clearCache();
                 getMeiziTu();
             }
-        },500);
+        }, 500);
     }
 
     private void clearCache() {
@@ -120,6 +122,7 @@ public class MeiziTuSimpleFragment extends RxBaseFragment {
             realm.commitTransaction();
         } catch (Exception e) {
             e.printStackTrace();
+            LogUtil.d("e.printStackTrace()_____"+e.getMessage());
         }
     }
 
@@ -134,7 +137,7 @@ public class MeiziTuSimpleFragment extends RxBaseFragment {
                     public void call(ResponseBody responseBody) {
                         try {
                             String html = responseBody.string();
-                            List<MeiziTu> list = MeiziUtil.getInstance().parserMeiziTuHtml(html,type);
+                            List<MeiziTu> list = MeiziUtil.getInstance().parserMeiziTuHtml(html, type);
                             MeiziUtil.getInstance().putMeiziTuCache(list);
                             findisTask();
                         } catch (IOException e) {
@@ -145,14 +148,21 @@ public class MeiziTuSimpleFragment extends RxBaseFragment {
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-
+                        mSwipeRefreshLayout.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                mSwipeRefreshLayout.setRefreshing(false);
+                            }
+                        });
+                        SnackbarUtil.showMessage(mRecyclerView, getString(R.string.error_message));
+                        LogUtil.d("throwable___"+throwable.toString());
                     }
                 });
     }
 
-    private void findisTask(){
+    private void findisTask() {
         mAdapter.notifyDataSetChanged();
-        if (mSwipeRefreshLayout.isRefreshing()){
+        if (mSwipeRefreshLayout.isRefreshing()) {
             mSwipeRefreshLayout.setRefreshing(false);
         }
         mIsRefreshing = false;

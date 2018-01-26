@@ -2,6 +2,7 @@ package com.fwk.moequestdemo.network.api;
 
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import rx.Observable;
 
@@ -27,12 +28,16 @@ public interface MeiziTuApi {
     /**
      * 分类查询
      */
+    @Headers({"User-Agent: a",
+            "Cache-Control: max-stale=1800"})
     @GET("{type}")
     Observable<ResponseBody> getMeiziTuType(@Path("type") String type);
 
     /**
      * 查询组内妹子图
      */
+    @Headers({"User-Agent: a",
+            "Cache-Control: max-stale=1800"})
     @GET("{type}/{id}")
     Observable<ResponseBody> getMeiziTuMeiziList(@Path("type") String type, @Path("id") String id);
 }

@@ -23,7 +23,6 @@ import java.util.List;
 import butterknife.Bind;
 import io.realm.Realm;
 import io.realm.RealmResults;
-import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;

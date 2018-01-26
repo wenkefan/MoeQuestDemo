@@ -17,7 +17,7 @@ public class MeiziTu extends RealmObject implements Serializable {
 
     private int height;
 
-    @PrimaryKey
+//    @PrimaryKey
     private String imageurl;
 
     private String url;

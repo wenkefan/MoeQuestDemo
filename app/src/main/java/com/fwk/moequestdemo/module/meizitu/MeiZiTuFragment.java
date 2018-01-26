@@ -27,7 +27,7 @@ public class MeiZiTuFragment extends RxBaseFragment {
     @Bind(R.id.view_pager)
     ViewPager mViewPager;
 
-    private List<String> titles = Arrays.asList("首页", "热门", "推荐", "性感", "日本", "台湾", "清纯", "自拍");
+    private List<String> titles = Arrays.asList("首页", "热门", "推荐", "性感", "日本", "台湾", "清纯");
 
     private List<String> types = Arrays.asList(
             ConstantUtil.HOME,
@@ -36,8 +36,7 @@ public class MeiZiTuFragment extends RxBaseFragment {
             ConstantUtil.XINGGAN_MEIZI,
             ConstantUtil.JAPAN_MEIZI,
             ConstantUtil.TAIWAN_MEIZI,
-            ConstantUtil.QINGCHUN_MEIZI,
-            ConstantUtil.ZIPAI_MEIZI);
+            ConstantUtil.QINGCHUN_MEIZI);
 
     private MeiZiTuFragment() {
         super();
